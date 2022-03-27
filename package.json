@@ -6,7 +6,11 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "build": "tsc",
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf ./dist",
+    "compile": "tsc",
+    "bs":"yarn build && yarn start",
+    "start": "nodemon  src/index.ts",
     "prettier:fix": "prettier --write '**/*.{ts,js,json}'",
     "prettier:check": "prettier --check '**/*.{ts,js,json}'",
     "lint-staged": "yarn prettier:fix && yarn lint",
