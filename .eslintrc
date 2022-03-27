@@ -4,6 +4,9 @@
     "plugins": [
       "@typescript-eslint"
     ],
+    "rules": {
+      "eqeqeq":"error"
+    },
     "extends": [
       "eslint:recommended",
       "plugin:@typescript-eslint/eslint-recommended",
