@@ -1,8 +1,10 @@
-/*import { jwt  } from 'jsonwebtoken';
+import  jwt   from 'jsonwebtoken';
 const generateToken = (userId: string) => {
-    return jwt.sign({ userId }, process.env.JWT_KEY!);
+    const secret:string = process.env.JWT_KEY as string
+    return jwt.sign({ userId }, secret);
     }
 const verifyToken = (token: string) => {
-    return jwt.verify(token, process.env.JWT_KEY!);
+    const secret:string = process.env.JWT_KEY as string
+    return jwt.verify(token, secret);
 }
-export { generateToken, verifyToken };*/
+export { generateToken, verifyToken };
