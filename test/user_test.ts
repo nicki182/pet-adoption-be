@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-describe('User registration', () => {
+describe('User validation', () => {
   it('verifies if email haves is correct length', () => {
     const email1 = 'nicki1@gmail.com';
     const email2 = 'papa1()';
@@ -43,5 +43,24 @@ describe('User registration', () => {
       const user2 = false;
       expect(user1).to.equal(false);
       expect(user2).to.equal(true);
+    });
+});
+
+describe('User CRUD services working', () => {
+  it('Create a user', async () => {
+    const users = [];
+    expect(users).to.length(1);
+  });
+  it('Gets users', () => {
+    const users = [];
+    expect(users).to.length(1);
+  }),
+    it('Get user by ID', () => {
+      const user = null;
+      expect(user).to.equal(true);
+    }),
+    it('Update user', () => {
+      const user = null;
+      expect(user).to.equal(true);
     });
 });

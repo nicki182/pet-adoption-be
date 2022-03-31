@@ -16,10 +16,10 @@ class Sever {
     await server.start();
     server.applyMiddleware({ app });
     app.listen(process.env.SERVER_PORT, () => {
-      console.log(
-        `🚀 Server ready at http://localhost:4000${server.graphqlPath}`
-      );
       console.log(`Server is running on port ${process.env.SERVER_PORT}`);
+      console.log(
+        `Server graphql server is running on port http://localhost:4000${server.graphqlPath}`
+      );
     });
   }
 }
