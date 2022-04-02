@@ -3,7 +3,15 @@
   "compilerOptions": {
     "outDir": "dist",
     "module": "commonjs",
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "target": "es5"
+  },
+  "paths": {
+   "@utils/**": "./src/utils/**/*.ts",
+   "@user/**": "./src/modules/user/**/*.ts",
+   "@logger/**": "./src/modules/logger/**/*.ts",
+   "@animal/**": "./src/modules/animal/**/*.ts",
   },
   "include": ["src"],
   "exclude": ["node_modules"]

@@ -1,8 +1,4 @@
-interface UserI {
-  id: number;
-  name: string;
-  email: string;
-}
+import { UserI } from './interfaces';
 class User {
   private id;
   private name;
@@ -28,3 +24,4 @@ class User {
     this.email = newEmail;
   }
 }
+export default User;
