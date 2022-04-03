@@ -9,12 +9,12 @@
     "paths": {
       "@/utils/*": ["./src/utils/*"],
       "@/user/*": ["./src/modules/user/*"],
-      "@/logger/*":[ "./src/modules/logger/*"],
+      "@/logger/*": ["./src/modules/logger/*"],
       "@/animal/*": ["./src/modules/animal/*"],
-      "@/session/*":["./src/modules/session/*"],
-      "@/redis":["./src/redis/*"]
-    },
+      "@/session/*": ["./src/modules/session/*"],
+      "@/redis": ["./src/redis/*"]
+    }
   },
   "include": ["src", "**/*.ts"],
-  "exclude": ["node_modules","test"]
+  "exclude": ["node_modules", "test"]
 }

@@ -1,24 +1,24 @@
 import jwt from 'jsonwebtoken';
 class Sesssion {
-    private access_token:string
-    private refresh_token:string
-    private userId:number
-    private readonly  secret:string = process.env.JWT_KEY as string
-    constructor(sessionData:SessionI){
-        this.access_token= sessionData.access_token
-        this.refresh_token = sessionData.refresh_token
-        this.userId = sessionData.userId
-    }
-    getAccessToken():string{
-        return this.access_token
-    }
-    getRefreshToken():string{
-       return this.refresh_token
-    }
-    getUserId(){
-        return this.userId
-    }
-    /*async verifyToken(token:string):boolean{
+  private access_token: string;
+  private refresh_token: string;
+  private userId: number;
+  private readonly secret: string = process.env.JWT_KEY as string;
+  constructor(sessionData: SessionI) {
+    this.access_token = sessionData.access_token;
+    this.refresh_token = sessionData.refresh_token;
+    this.userId = sessionData.userId;
+  }
+  getAccessToken(): string {
+    return this.access_token;
+  }
+  getRefreshToken(): string {
+    return this.refresh_token;
+  }
+  getUserId() {
+    return this.userId;
+  }
+  /*async verifyToken(token:string):boolean{
         return jwt.verify(token, this.secret);
     }
     isAccessTokenVerified():boolean{
