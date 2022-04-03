@@ -1,23 +1,7 @@
 import jwt from 'jsonwebtoken';
-class Sesssion {
-  private access_token: string;
-  private refresh_token: string;
-  private userId: number;
-  private readonly secret: string = process.env.JWT_KEY as string;
-  constructor(sessionData: SessionI) {
-    this.access_token = sessionData.access_token;
-    this.refresh_token = sessionData.refresh_token;
-    this.userId = sessionData.userId;
-  }
-  getAccessToken(): string {
-    return this.access_token;
-  }
-  getRefreshToken(): string {
-    return this.refresh_token;
-  }
-  getUserId() {
-    return this.userId;
-  }
+import { Entity, Schema } from 'redis-om'
+import  RedisClient  from '../../redis';
+class Sesssion extends Entity{
   /*async verifyToken(token:string):boolean{
         return jwt.verify(token, this.secret);
     }
@@ -38,4 +22,10 @@ class Sesssion {
         return this.isEqualToken(this.refresh_token,token)
     }*/
 }
+const schema = new Schema(Sesssion,{
+    access_token:{type:'string'},
+    refresh_token:{type:'string'},
+    userId:{type:'string'}    
+})
+export const sessionRepository = RedisClient.getClient().fetchRepository(schema)
 export default Sesssion;
