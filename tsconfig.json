@@ -5,14 +5,16 @@
     "module": "commonjs",
     "strictNullChecks": true,
     "sourceMap": true,
-    "target": "es5"
+    "target": "es5",
+    "paths": {
+      "@/utils/*": ["./src/utils/*"],
+      "@/user/*": ["./src/modules/user/*"],
+      "@/logger/*":[ "./src/modules/logger/*"],
+      "@/animal/*": ["./src/modules/animal/*"],
+      "@/session/*":["./src/modules/session/*"],
+      "@/redis":["./src/redis/*"]
+    },
   },
-  "paths": {
-   "@utils/**": "./src/utils/**/*.ts",
-   "@user/**": "./src/modules/user/**/*.ts",
-   "@logger/**": "./src/modules/logger/**/*.ts",
-   "@animal/**": "./src/modules/animal/**/*.ts",
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src", "**/*.ts"],
+  "exclude": ["node_modules","test"]
 }

@@ -47,6 +47,7 @@
       "pre-commit": "yarn lint-staged"
     }
   },
+  "private":"true",
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",

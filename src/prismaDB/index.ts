@@ -8,11 +8,11 @@ class PrismaServices {
     const prismaClient = new PrismaClient();
     this.prisma = prismaClient[modelName];
   }
-  public getByField(field: string, value: string,select?:any) {
-    return this.prisma.findUnique({ where: { [field]: value },select });
+  public getByField(field: string, value: string, select?: any) {
+    return this.prisma.findUnique({ where: { [field]: value }, select });
   }
-  public getAll(select?:any) {
-    this.prisma.findMany({select});
+  public getAll(select?: any) {
+    this.prisma.findMany({ select });
   }
   public create(data: any) {
     this.prisma.create({ data });

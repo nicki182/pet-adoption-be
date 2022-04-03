@@ -35,50 +35,36 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var dotenv_1 = __importDefault(require("dotenv"));
-var cors_1 = __importDefault(require("cors"));
-var typedefs_1 = __importDefault(require("./graphql/typedefs"));
-var resolvers_1 = __importDefault(require("./graphql/resolvers"));
-var redis_1 = __importDefault(require("./redis"));
-var apollo_server_express_1 = require("apollo-server-express");
-//import { PrismaClient } from '@prisma/client';
-dotenv_1.default.config();
-var Sever = /** @class */ (function () {
-    function Sever() {
+var redis_om_1 = require("redis-om");
+var RedisClient = /** @class */ (function () {
+    function RedisClient() {
     }
-    Sever.prototype.start = function () {
+    RedisClient.prototype.getClient = function () {
+        return this.client;
+    };
+    RedisClient.prototype.start = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var server, app;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var _a, e_1;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        server = new apollo_server_express_1.ApolloServer({ typeDefs: typedefs_1.default, resolvers: resolvers_1.default });
-                        app = (0, express_1.default)();
-                        app.use((0, cors_1.default)());
-                        app.use(express_1.default.json());
-                        return [4 /*yield*/, server.start()];
+                        _b.trys.push([0, 2, , 3]);
+                        console.log('test');
+                        _a = this;
+                        return [4 /*yield*/, new redis_om_1.Client().open(process.env.REDIS_PORT).catch(function (e) { return console.log(e); })];
                     case 1:
-                        _a.sent();
-                        server.applyMiddleware({ app: app });
-                        return [4 /*yield*/, redis_1.default.start()];
+                        _a.client = _b.sent();
+                        return [3 /*break*/, 3];
                     case 2:
-                        _a.sent();
-                        app.listen(process.env.SERVER_PORT, function () {
-                            console.log("Server is running on port ".concat(process.env.SERVER_PORT));
-                            console.log("Server graphql server is running on port http://localhost:4000".concat(server.graphqlPath));
-                        });
-                        return [2 /*return*/];
+                        e_1 = _b.sent();
+                        throw new Error(e_1);
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    return Sever;
+    return RedisClient;
 }());
-var server = new Sever();
-server.start();
+exports.default = new RedisClient();
 //# sourceMappingURL=index.js.map
