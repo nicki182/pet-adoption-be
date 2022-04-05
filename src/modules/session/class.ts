@@ -1,31 +1,23 @@
-import jwt from 'jsonwebtoken';
-import { Entity, Schema } from 'redis-om'
-import  RedisClient  from '../../redis';
-class Sesssion extends Entity{
-  /*async verifyToken(token:string):boolean{
-        return jwt.verify(token, this.secret);
+import jwt from "jsonwebtoken";
+import {SessionI} from "./interfaces";
+class Session  {
+    private accessToken:string;
+    private refreshToken:string;
+    private userId:number;
+    constructor(sessionData:SessionI){
+        const {accessToken,refreshToken,userId} = sessionData;
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+        this.userId = userId;
     }
-    isAccessTokenVerified():boolean{
-        return this.verifyToken(this.getAccessToken());
+    public getUserId(){
+        return this.userId;
     }
-    isRefreshTokenVerified():boolean{
-        return this.verifyToken(this.getRefreshToken());
+    public getAccessToken():string{
+        return this.accessToken;
     }
-    isEqualToken(token1:string,token2:string):boolean{
-        //TODO: CHECK AFTER IF THIS IS HOW YOU COMPARE TOKENS
-        return token1 === token2
+    public getRefreshToken():string{
+        return this.refreshToken;
     }
-    isEqualToAccesToken(token:string):boolean{
-        return this.isEqualToken(this.access_token,token)
-    }
-    isEquelToRefreshToken(token:string):boolean{
-        return this.isEqualToken(this.refresh_token,token)
-    }*/
 }
-const schema = new Schema(Sesssion,{
-    access_token:{type:'string'},
-    refresh_token:{type:'string'},
-    userId:{type:'string'}    
-})
-export const sessionRepository = RedisClient.getClient().fetchRepository(schema)
-export default Sesssion;
+export default Session;

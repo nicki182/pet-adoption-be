@@ -1,30 +1,30 @@
-import PrismaServices from '../../prismaDB/index';
-import { UserI } from './interfaces';
+import PrismaServices from "../../prismaCRUD/index";
+import { UserI } from "./interfaces";
 class UserServices extends PrismaServices {
   constructor() {
-    super('user');
+    super("user");
   }
   public async singUp(userData: any) {
-    const user = await this.getByField('email', userData.email);
+    const user = await this.getByField("email", userData.email);
     if (user) {
       return {
-        status: 'error',
-        message: 'User already exists',
+        status: "error",
+        message: "User already exists",
       };
     }
     const newUser = await this.create(userData);
     return {
-      status: 'success',
-      message: 'User created successfully',
+      status: "success",
+      message: "User created successfully",
       user: newUser,
     };
   }
   public async singIn(userData: any) {
-    const user = await this.getByField('email', userData.email);
+    const user = await this.getByField("email", userData.email);
     if (!user) {
       return {
-        status: 'error',
-        message: 'User does not exist',
+        status: "error",
+        message: "User does not exist",
       };
     }
     /*if (user.password !== userData.password) {
@@ -34,8 +34,8 @@ class UserServices extends PrismaServices {
       };
     }*/
     return {
-      status: 'success',
-      message: 'User logged in successfully',
+      status: "success",
+      message: "User logged in successfully",
       user: user,
     };
   }

@@ -1,4 +1,4 @@
-import { UserI } from './interfaces';
+import { UserI } from "./interfaces";
 class User {
   private id;
   private name;

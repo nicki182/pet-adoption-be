@@ -1,5 +1,5 @@
-interface SessionI {
-  access_token: string;
-  refresh_token: string;
+export interface SessionI {
+  accessToken: string;
+  refreshToken: string;
   userId: number;
 }

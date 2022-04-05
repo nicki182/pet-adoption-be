@@ -1,4 +1,4 @@
-import { Client } from 'redis-om';
+import {createClient} from "redis"
 class RedisClient {
   //TODO: Check client type of redis-om
   private client: any;
@@ -7,7 +7,10 @@ class RedisClient {
   }
   public async start(): Promise<void> {
     try {
-      this.client = await new Client().open(process.env.REDIS_PORT);
+        const client = createClient({ url:process.env.REDIS_PORT })
+        await client.connect()
+      this.client = client;
+      
     } catch (e) {
       throw new Error(e as string);
     }

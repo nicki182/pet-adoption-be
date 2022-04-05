@@ -1,5 +1,5 @@
-import { createLogger, format, transports } from 'winston';
-import DailyRotateFile from 'winston-daily-rotate-file';
+import { createLogger, format, transports } from "winston";
+import DailyRotateFile from "winston-daily-rotate-file";
 const { combine, timestamp, printf, colorize } = format;
 const loggerFormat = printf(({ level, message, timestamp }) => {
   return `${timestamp}  ${level}: ${message}`;
@@ -11,19 +11,19 @@ const logger = createLogger({
       format: combine(colorize(), timestamp(), loggerFormat),
     }),
     new DailyRotateFile({
-      filename: './log/%DATE%-combined-logs.log',
+      filename: "./log/%DATE%-combined-logs.log",
     }),
     new DailyRotateFile({
-      filename: './log/%DATE%-error-logs.log',
-      level: 'error',
+      filename: "./log/%DATE%-error-logs.log",
+      level: "error",
     }),
     new DailyRotateFile({
-      filename: './log/%DATE%-warn-logs.log',
-      level: 'warn',
+      filename: "./log/%DATE%-warn-logs.log",
+      level: "warn",
     }),
     new DailyRotateFile({
-      filename: './log/%DATE%-info-logs.log',
-      level: 'info',
+      filename: "./log/%DATE%-info-logs.log",
+      level: "info",
     }),
   ],
 });

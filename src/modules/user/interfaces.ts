@@ -3,3 +3,8 @@ export interface UserI {
   name: string;
   email: string;
 }
+export interface UserSelect {
+  name?: string;
+  email?: string;
+  id:number
+}
