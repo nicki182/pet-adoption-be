@@ -14,7 +14,7 @@ class PrismaServices {
   public getAll(select?: object) {
     return this.prisma.findMany({ select });
   }
-  public create(data:any) {
+  public create(data: any) {
     return this.prisma.create({ data });
   }
   public update(id: number, data: any) {

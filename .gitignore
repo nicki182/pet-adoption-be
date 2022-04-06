@@ -2,3 +2,5 @@ node_modules
 .husky
 yarn.lock
 yarn-error.log
+dist
+.env

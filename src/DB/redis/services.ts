@@ -1,6 +1,6 @@
 import { GenericCrudServicesI } from "../../interfaces";
 import RedisClient from "./index";
-class RedisCRUDServices{
+class RedisCRUDServices {
   private readonly redisClient = RedisClient.getClient();
 
   public async get(key: string): Promise<string> {
@@ -15,7 +15,7 @@ class RedisCRUDServices{
     return await this.redisClient.del(key);
   }
   async setToExpire(key: string, value: string, expire: number): Promise<void> {
-    return await this.redisClient.setex(['EXPIRE',key, expire]);
+    return await this.redisClient.setex(["EXPIRE", key, expire]);
   }
 }
 export default RedisCRUDServices;
