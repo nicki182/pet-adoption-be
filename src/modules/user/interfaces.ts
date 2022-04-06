@@ -6,5 +6,5 @@ export interface UserI {
 export interface UserSelect {
   name?: string;
   email?: string;
-  id:number
+  id: number;
 }

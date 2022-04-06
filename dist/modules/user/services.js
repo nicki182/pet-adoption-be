@@ -54,7 +54,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var index_1 = __importDefault(require("../../prismaCRUD/index"));
+var index_1 = __importDefault(require("../../DB/prisma/index"));
 var UserServices = /** @class */ (function (_super) {
     __extends(UserServices, _super);
     function UserServices() {

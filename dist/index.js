@@ -40,14 +40,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-var dotenv_1 = __importDefault(require("dotenv"));
 var cors_1 = __importDefault(require("cors"));
 var typedefs_1 = __importDefault(require("./graphql/typedefs"));
 var resolvers_1 = __importDefault(require("./graphql/resolvers"));
-var redis_1 = __importDefault(require("./redis"));
 var apollo_server_express_1 = require("apollo-server-express");
 //import { PrismaClient } from '@prisma/client';
-dotenv_1.default.config();
 var Sever = /** @class */ (function () {
     function Sever() {
     }
@@ -65,9 +62,7 @@ var Sever = /** @class */ (function () {
                     case 1:
                         _a.sent();
                         server.applyMiddleware({ app: app });
-                        return [4 /*yield*/, redis_1.default.start()];
-                    case 2:
-                        _a.sent();
+                        console.log('env', process.env.SERVER_PORT);
                         app.listen(process.env.SERVER_PORT, function () {
                             console.log("Server is running on port ".concat(process.env.SERVER_PORT));
                             console.log("Server graphql server is running on port http://localhost:4000".concat(server.graphqlPath));
