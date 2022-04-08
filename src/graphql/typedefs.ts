@@ -3,9 +3,6 @@ const typeDefs = gql`
   type Query {
     hello: String
   }
-  type User {
-    id: ID!
-    name: String
-  }
+
 `;
 export default typeDefs;

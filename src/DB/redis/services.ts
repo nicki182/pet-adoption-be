@@ -15,7 +15,7 @@ class RedisCRUDServices {
     return await this.redisClient.del(key);
   }
   async setToExpire(key: string, value: string, expire: number): Promise<void> {
-    return await this.redisClient.setex(["EXPIRE", key, expire]);
+    return await this.redisClient.sendCommand(["EXPIRE", key, expire]);
   }
 }
 export default RedisCRUDServices;

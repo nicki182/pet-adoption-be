@@ -45,7 +45,7 @@ describe("User validation", () => {
       expect(user2).to.equal(true);
     });
 });
-
+/*
 describe("User CRUD services working", () => {
   it("Create a user", async () => {
     const users = [];
@@ -64,3 +64,4 @@ describe("User CRUD services working", () => {
       expect(user).to.equal(true);
     });
 });
+*/

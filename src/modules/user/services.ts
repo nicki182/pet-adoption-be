@@ -1,4 +1,4 @@
-import PrismaServices from "../../DB/prisma/index";
+import PrismaServices from "../../DB/prisma/services";
 import { UserI } from "./interfaces";
 class UserServices extends PrismaServices {
   constructor() {

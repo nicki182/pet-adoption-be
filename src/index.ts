@@ -1,13 +1,16 @@
-import express from "express";
-import cors from "cors";
-import typeDefs from "./graphql/typedefs";
-import resolvers from "./graphql/resolvers";
-import RedisClient from "./DB/redis";
 import { ApolloServer } from "apollo-server-express";
+import cors from "cors";
+import express from "express";
+import prisma from "./DB/prisma";
+import resolvers from "./graphql/resolvers";
+import typeDefs from "./graphql/typedefs";
+import expressWinston from 'express-winston';
+import {format, transports } from "winston";
+
 //import { PrismaClient } from '@prisma/client';
 class Sever {
   async start() {
-    const server = new ApolloServer({ typeDefs, resolvers });
+    const server = new ApolloServer({ typeDefs, resolvers,context: { prisma:prisma.getPrismaClient() } });
     //const prisma = new PrismaClient();
 
     const app = express();
@@ -15,6 +18,13 @@ class Sever {
     app.use(express.json());
     await server.start();
     server.applyMiddleware({ app });
+    app.use(expressWinston.logger({
+      transports: [
+        new transports.Console()
+      ],
+      expressFormat: true, // Use the default Express/morgan request formatting. Enabling this will override any msg if true. Will only output colors with colorize set to true
+    }))
+
     app.listen(process.env.SERVER_PORT, () => {
       console.log(`Server is running on port ${process.env.SERVER_PORT}`);
       console.log(

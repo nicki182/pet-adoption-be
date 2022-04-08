@@ -6,7 +6,7 @@ const generateToken = (userId: string) => {
       data: { userId },
     },
     secret,
-    { expiresIn: process.env.EXPIRATION_TIME }
+    { expiresIn: Number(process.env.EXPIRATION_TIME) }
   );
 };
 const verifyToken = (token: string) => {
