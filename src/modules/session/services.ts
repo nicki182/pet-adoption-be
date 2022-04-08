@@ -21,9 +21,9 @@ class SessionServices extends RedisCRUDServices {
   public async deleteSession(userId: string): Promise<void> {
     await this.del(userId);
   }
-    public async updateSession(session: SessionI): Promise<Session> {
+  public async updateSession(session: SessionI): Promise<Session> {
     await this.set(String(session.userId), JSON.stringify(session));
     return new Session(session);
-    }
+  }
 }
 export default new SessionServices();

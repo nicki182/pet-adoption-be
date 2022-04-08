@@ -17,7 +17,7 @@
     "lint-staged": "yarn prettier:fix && yarn lint",
     "docker:up": "sudo docker-compose up -d",
     "docker:down": "sudo docker-compose down",
-    "test": "yarn docker:up && yarn prisma migrate deploy && mocha -—exit --timeout 10000 -r  ts-node/register  test/*.ts",
+    "test": "yarn docker:up && yarn prisma migrate deploy && mocha -—exit --timeout 10000 -r  ts-node/register  test/*.ts --reporter nyan",
     "coverege": "nyc yarn test",
     "bt": "yarn build && yarn test",
     "bc": "yarn build && yarn coverege"

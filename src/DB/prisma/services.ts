@@ -1,10 +1,10 @@
-import  prismaGenerated  from "./index";
+import prismaGenerated from "./index";
 //Add model names to the list below to enable them to be used in the code below
 type ModelType = "user";
 class PrismaServices {
   private readonly prisma;
   constructor(modelName: ModelType) {
-    const prismaClient =prismaGenerated.getPrismaClient();
+    const prismaClient = prismaGenerated.getPrismaClient();
     this.prisma = prismaClient[modelName];
   }
   //TODO:RESOLVE ANY

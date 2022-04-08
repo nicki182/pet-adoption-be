@@ -13,9 +13,9 @@
       "@session/*": ["./src/modules/session/*"],
       "@redis/*": ["./src/DB/redis/*"],
       "@prismaAPI/*": ["./src/DB/prisma/*"],
-      "@graphql/*":["./graphql/*"]
+      "@graphql/*": ["./graphql/*"]
     }
   },
   "include": ["src", "**/*.ts"],
-  "exclude": ["node_modules", "test","dist",".nyc_output","husky"]
+  "exclude": ["node_modules", "test", "dist", ".nyc_output", "husky"]
 }
