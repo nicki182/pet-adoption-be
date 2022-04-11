@@ -1,6 +1,6 @@
 import { UserI } from "./interfaces";
 class User {
-  private id;
+  private  id;
   private name;
   private email;
   constructor(userData: UserI) {
@@ -8,7 +8,7 @@ class User {
     this.name = userData.name;
     this.email = userData.email;
   }
-  public getId(): number {
+  public getId(): string {
     return this.id;
   }
   public getName(): string {
@@ -22,6 +22,9 @@ class User {
   }
   public setEmail(newEmail: string) {
     this.email = newEmail;
+  }
+  public validatePassword(password: string): boolean {
+    return true;
   }
 }
 export default User;

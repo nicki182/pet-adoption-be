@@ -5,7 +5,9 @@
     "module": "commonjs",
     "strictNullChecks": true,
     "sourceMap": true,
-    "target": "es5",
+    "noImplicitAny": false,
+    "strictFunctionTypes":false,
+    "target": "es6",
     "paths": {
       "@utils/*": ["./src/utils/*"],
       "@user/*": ["./src/modules/user/*"],
@@ -13,9 +15,10 @@
       "@session/*": ["./src/modules/session/*"],
       "@redis/*": ["./src/DB/redis/*"],
       "@prismaAPI/*": ["./src/DB/prisma/*"],
-      "@graphql/*": ["./graphql/*"]
+      "@graphql/*": ["./graphql/*"],
+      "@error":["./src/modules/error/*"],
     }
   },
   "include": ["src", "**/*.ts"],
-  "exclude": ["node_modules", "test", "dist", ".nyc_output", "husky"]
+  "exclude": ["node_modules", "dist", ".nyc_output", "husky"]
 }

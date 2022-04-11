@@ -1,3 +1,4 @@
+import  {InferType, ObjectSchema} from 'yup';
 //Crud services interface to implement in crud services of any services
 //Cannot be done yet with object
 //SEE A WORKAOURND TO IMPLEMENT IT
@@ -8,3 +9,9 @@ export interface GenericCrudServicesI<C, I, ID> {
   update: (id: ID, data: I) => Promise<C>;
   delete: (id: ID) => Promise<C>;
 }
+export interface IValidationSchema {
+  [key: string]: any;
+}
+
+export type SchemaType <T extends IValidationSchema> = InferType<ObjectSchema<T>> 
+

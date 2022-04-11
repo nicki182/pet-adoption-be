@@ -26,20 +26,16 @@ services:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: prisma
       POSTGRES_DB: tests
-  web:
-    build: .
-    command: npm run dev
-    volumes:
-      - .:/usr/app/
-      - /usr/app/node_modules
-    ports:
-      - "3000:3000"
-    depends_on:
-      - redis
-      - db
-    environment:
-      DATABASE_URL: postgres://todoapp@postgres/todos
-      SERVER_PORT: 3000
-      REDIS_PORT: redis://localhost:6370
-      EXPIRATION_TIME: 900
-      JWT_KEY: DAJIKDJASJDAS
+  integration:
+              build:
+                context: .
+                dockerfile: Dockerfile
+              depends_on:
+                - redis
+                - db
+              environment:
+                DATABASE_URL: postgres://todoapp@postgres/todos
+                SERVER_PORT: 3000
+                REDIS_PORT: redis://localhost:6370
+                EXPIRATION_TIME: 900
+                JWT_KEY: DAJIKDJASJDAS

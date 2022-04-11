@@ -20,6 +20,9 @@ class PrismaServices {
   public update(id: number, data: any) {
     return this.prisma.update({ where: { id }, data });
   }
+  public updateBy(field: string, value: string, data: any) {
+    return this.prisma.update({ where: { [field]: value }, data });
+  }
   public delete(id: number) {
     return this.prisma.delete({ where: { id } });
   }

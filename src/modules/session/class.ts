@@ -3,7 +3,7 @@ import { SessionI } from "./interfaces";
 class Session {
   private accessToken: string;
   private refreshToken: string;
-  private userId: number;
+  private userId: string;
   private readonly expiration = Number(process.env.EXPIRATION_TIME);
   constructor(sessionData: SessionI) {
     const { accessToken, refreshToken, userId } = sessionData;
@@ -11,7 +11,7 @@ class Session {
     this.refreshToken = refreshToken;
     this.userId = userId;
   }
-  public gerExpirationTime(): number {
+  public getExpirationTime(): number {
     return this.expiration;
   }
   public getUserId() {

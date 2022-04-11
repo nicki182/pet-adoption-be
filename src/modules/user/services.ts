@@ -1,43 +1,35 @@
 import PrismaServices from "../../DB/prisma/services";
-import { UserI } from "./interfaces";
+import { UserI, UserSelect, UserModelI } from "./interfaces";
+import User from './class'
+import { comparePassword } from "@utils/authentication";
 class UserServices extends PrismaServices {
   constructor() {
     super("user");
   }
-  public async singUp(userData: any) {
-    const user = await this.getByField("email", userData.email);
-    if (user) {
-      return {
-        status: "error",
-        message: "User already exists",
-      };
-    }
-    const newUser = await this.create(userData);
-    return {
-      status: "success",
-      message: "User created successfully",
-      user: newUser,
-    };
+  public async getUserByField(field: string, value: string,select?:UserSelect): Promise<User> {
+    const userData:UserModelI = await this.getByField(field, value,select);
+    return new User({id:userData.cuid,email:userData.email,name:userData.name});
   }
-  public async singIn(userData: any) {
-    const user = await this.getByField("email", userData.email);
-    if (!user) {
-      return {
-        status: "error",
-        message: "User does not exist",
-      };
-    }
-    /*if (user.password !== userData.password) {
-      return {
-        status: 'error',
-        message: 'Wrong password',
-      };
-    }*/
-    return {
-      status: "success",
-      message: "User logged in successfully",
-      user: user,
-    };
+  public async getUserById(id: number,select?:UserSelect): Promise<User> {
+    return this.getByField("id", String(id),select);
   }
+  public async getUserByEmail(email: string,select?:UserSelect): Promise<User> {
+    return this.getByField("email", email,select);
+  }
+  public async getUserByCuid(id: string,select?:UserSelect): Promise<User> {
+    return this.getByField("cuid", id,select);
+  }
+  public async createUser(userData: UserI): Promise<User> {
+    const user:UserModelI = await this.create(userData);
+    return new User({id:user.cuid,email:user.email,name:user.name});
+  }
+  public async updateUser(userData: UserI): Promise<User> {
+    const user:UserModelI = await this.updateBy("cuid", userData.id, userData);
+    return new User({id:user.cuid,email:user.email,name:user.name});
+  }
+  public validatePassword(password: string,passwordToCompare:string): boolean {
+    return comparePassword(password, passwordToCompare);
+  }
+  
 }
 export default new UserServices();

@@ -5,7 +5,8 @@ import prisma from "./DB/prisma";
 import resolvers from "./graphql/resolvers";
 import typeDefs from "./graphql/typedefs";
 import expressWinston from "express-winston";
-import { format, transports } from "winston";
+import {  transports } from "winston";
+import { Server } from "http";
 
 //import { PrismaClient } from '@prisma/client';
 class Sever {
@@ -40,3 +41,5 @@ class Sever {
 const server = new Sever();
 
 server.start();
+
+export default server;
