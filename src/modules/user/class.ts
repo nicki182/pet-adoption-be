@@ -1,6 +1,6 @@
 import { UserI } from "./interfaces";
 class User {
-  private  id;
+  private id;
   private name;
   private email;
   constructor(userData: UserI) {

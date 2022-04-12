@@ -14,5 +14,8 @@ class RedisClient {
       throw new Error(e as string);
     }
   }
+  public async stop(): Promise<void> {
+    await this.client.quit();
+  }
 }
 export default new RedisClient();

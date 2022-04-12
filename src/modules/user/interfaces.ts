@@ -3,7 +3,7 @@ export interface UserI {
   name: string;
   email: string;
 }
-export interface UserModelI{
+export interface UserModelI {
   id: number;
   name: string;
   email: string;

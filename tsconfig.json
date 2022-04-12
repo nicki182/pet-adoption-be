@@ -6,19 +6,20 @@
     "strictNullChecks": true,
     "sourceMap": true,
     "noImplicitAny": false,
-    "strictFunctionTypes":false,
+    "strictFunctionTypes": false,
     "target": "es6",
+    "baseUrl": ".",
     "paths": {
-      "@utils/*": ["./src/utils/*"],
-      "@user/*": ["./src/modules/user/*"],
-      "@animal/*": ["./src/modules/animal/*"],
-      "@session/*": ["./src/modules/session/*"],
-      "@redis/*": ["./src/DB/redis/*"],
-      "@prismaAPI/*": ["./src/DB/prisma/*"],
-      "@graphql/*": ["./graphql/*"],
-      "@error":["./src/modules/error/*"],
+      "@utils/*": ["src/utils/*"],
+      "@user/*": ["src/modules/user/*"],
+      "@animal/*": ["src/modules/animal/*"],
+      "@session/*": ["src/modules/session/*"],
+      "@redis/*": ["src/DB/redis/*"],
+      "@prismaAPI/*": ["src/DB/prisma/*"],
+      "@graphql/*": ["src/graphql/*"],
+      "@error": ["src/modules/error/*"]
     }
   },
-  "include": ["src", "**/*.ts"],
+  "include": ["src","**/*.ts"],
   "exclude": ["node_modules", "dist", ".nyc_output", "husky"]
 }

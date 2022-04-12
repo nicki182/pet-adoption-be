@@ -1,5 +1,14 @@
 FROM node:14.17.0
-COPY ./ /app
-WORKDIR /app
+# Create app directory
+# Create Directory for the Container
+WORKDIR /usr/src/app
+# Only copy the package.json file to work directory
+COPY package.json .
+# Install all Packages
 RUN yarn install
-CMD ["npm","coverege"]
+# Copy all other source code to work directory
+COPY . /usr/src/app
+
+RUN yarn build
+
+CMD ["yarn","coverege"]

@@ -1,4 +1,4 @@
-import  {InferType, ObjectSchema} from 'yup';
+import { InferType, ObjectSchema } from "yup";
 //Crud services interface to implement in crud services of any services
 //Cannot be done yet with object
 //SEE A WORKAOURND TO IMPLEMENT IT
@@ -13,5 +13,6 @@ export interface IValidationSchema {
   [key: string]: any;
 }
 
-export type SchemaType <T extends IValidationSchema> = InferType<ObjectSchema<T>> 
-
+export type SchemaType<T extends IValidationSchema> = InferType<
+  ObjectSchema<T>
+>;
