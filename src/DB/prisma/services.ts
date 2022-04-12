@@ -30,13 +30,13 @@ class PrismaServices {
   public async deleteByField(field: string, value: string) {
     return this.prisma.delete({ where: { [field]: value } });
   }
-  public async createMany(data:unknown[]) {
+  public async createMany(data: unknown[]) {
     return this.prisma.createMany({
       data,
     });
   }
-  public deleteMany():PrismaPromise<unknown> {
-    return this.prisma.deleteMany()
-  }  
+  public deleteMany(): PrismaPromise<unknown> {
+    return this.prisma.deleteMany();
+  }
 }
 export default PrismaServices;

@@ -5,6 +5,9 @@ I use yarn on top of node which is faster in certain cases. Node 14.17.0 version
 #### - DBs:
 * Prisma
 * Redis
+### - Communication:
+* REST with express
+* Graphql 
 #### - Testing:
 * Mocha
 * Chai
