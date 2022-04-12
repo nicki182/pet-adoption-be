@@ -4,6 +4,7 @@ FROM node:14.17.0
 WORKDIR /usr/src/app
 # Only copy the package.json file to work directory
 COPY package.json .
+COPY ./prisma .
 # Install all Packages
 RUN yarn install
 # Copy all other source code to work directory

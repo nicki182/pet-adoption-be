@@ -3,6 +3,11 @@ export interface UserI {
   name: string;
   email: string;
 }
+export interface UserCreate {
+  name: string;
+  email: string;
+  password: string;
+}
 export interface UserModelI {
   id: number;
   name: string;

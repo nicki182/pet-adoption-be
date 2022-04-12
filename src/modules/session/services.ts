@@ -3,7 +3,7 @@ import RedisCRUDServices from "@redis/services";
 import Session from "./class";
 import { SessionI } from "./interfaces";
 import { generateToken } from "@utils/authentication";
-import CustomError from '../error/index';
+import CustomError from "../error/index";
 class SessionServices extends RedisCRUDServices {
   public async createSession(userId: string): Promise<Session> {
     const accessToken = await this.createAccessToken(userId);
@@ -14,13 +14,13 @@ class SessionServices extends RedisCRUDServices {
       userId,
     };
     const session = new Session(sessionData);
-    try{
-    await this.setToExpire(
-      userId,
-      JSON.stringify(session),
-      session.getExpirationTime()
-    );
-    }catch(e){
+    try {
+      await this.setToExpire(
+        userId,
+        JSON.stringify(session),
+        Number(process.env.EXPIRATION_TIME)
+      );
+    } catch (e) {
       throw new CustomError(String(e));
     }
     return session;

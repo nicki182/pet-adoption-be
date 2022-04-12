@@ -10,7 +10,7 @@ import redis from "@redis/index";
 //import { PrismaClient } from '@prisma/client';
 class Sever {
   async start() {
-   /* const server = new ApolloServer({
+    /* const server = new ApolloServer({
       typeDefs,
       resolvers,
       context: { prisma: prisma.getPrismaClient() },
@@ -31,8 +31,8 @@ class Sever {
     app.listen(process.env.SERVER_PORT, () => {
       console.log(`Server is running on port ${process.env.SERVER_PORT}`);
       //console.log(
-        //`Server graphql server is on port http://localhost:4000${server.graphqlPath}`
-     // );
+      //`Server graphql server is on port http://localhost:4000${server.graphqlPath}`
+      // );
     });
   }
 }
