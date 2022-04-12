@@ -3,7 +3,7 @@ import { expect } from "chai";
 import _ from "lodash";
 import SessionService from "@session/services";
 import RedisClient from "@redis/index";
-import { SessionI } from '@session/interfaces';
+import { SessionI } from "@session/interfaces";
 
 const start = async () => {
   await RedisClient.start();
@@ -51,31 +51,33 @@ describe("Session tests", () => {
         })
         .then(() => done());
     }),
-    it("Session is deleted by expiration time", (done) =>{ 
-    const userId = "777777";
-    SessionService.createSession(userId).then((session) => {
-        setTimeout(() => {
+    it("Session is deleted by expiration time", (done) => {
+      const userId = "777777";
+      SessionService.createSession(userId)
+        .then(() => {
+          setTimeout(() => {
             SessionService.getSession(userId);
+          });
         })
-    }).catch((error) => {
+        .catch((error) => {
           expect(String(_.get(error, "message"))).to.be.a("Sesssion not found");
           done();
         })
         .then(() => done());
-      }),
-      it("Session is updated", () => {
-        const userId = "666666";
-        const newSession:SessionI = {
-            userId: userId,
-            accessToken: "123123",
-            refreshToken: "123123",
-        }
-        SessionService.createSession(userId).then((session) => {
-        SessionService.updateSession(newSession).then((session) => {
-            SessionService.getSession(userId).then((session) => {
-                expect(session).to.be.deep.equal(newSession);
-                })          
-            })
-        })
-    })
+    }),
+    it("Session is updated", () => {
+      const userId = "666666";
+      const newSession: SessionI = {
+        userId: userId,
+        accessToken: "123123",
+        refreshToken: "123123",
+      };
+      SessionService.createSession(userId).then(() => {
+        SessionService.updateSession(newSession).then(() => {
+          SessionService.getSession(userId).then((session) => {
+            expect(session).to.be.deep.equal(newSession);
+          });
+        });
+      });
+    });
 });

@@ -1,7 +1,7 @@
 import PrismaServices from "../../DB/prisma/services";
-import { UserI, UserSelect, UserModelI,UserCreate } from "./interfaces";
+import { UserI, UserSelect, UserModelI, UserCreate } from "./interfaces";
 import User from "./class";
-import { comparePassword,hashPassword } from "@utils/authentication";
+import { comparePassword, hashPassword } from "@utils/authentication";
 class UserServices extends PrismaServices {
   constructor() {
     super("user");
@@ -32,7 +32,7 @@ class UserServices extends PrismaServices {
   }
   public async createUser(userData: UserCreate): Promise<User> {
     const password = await hashPassword(userData.password);
-    const user: UserModelI = await this.create({...userData, password});
+    const user: UserModelI = await this.create({ ...userData, password });
     return new User({ id: user.cuid, email: user.email, name: user.name });
   }
   public async updateUser(userData: UserI): Promise<User> {
