@@ -14,7 +14,7 @@ const start = async () => {
 };
 const stop = async () => {
   await SessionService.deleteAll();
-  await RedisClient.stop();
+  //await RedisClient.stop();
 };
 // runs before all tests in this block
 beforeEach((done) => {
@@ -26,7 +26,7 @@ afterEach((done) => {
   stop().then(() => done());
 });
 
-describe("Session tests", () => {
+describe("Session Services tests", () => {
   it("Session is created", () => {
     const userId = "666666";
     SessionService.createSession(userId).then((session) => {

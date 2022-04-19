@@ -17,9 +17,13 @@
       "@redis/*": ["src/DB/redis/*"],
       "@prismaAPI/*": ["src/DB/prisma/*"],
       "@graphql/*": ["src/graphql/*"],
-      "@error": ["src/modules/error/*"]
+      "@error/*": ["src/modules/error/*"],
+      "@middleware/*": ["src/middleware/*"],
+      "@routes/*": ["src/routes/*"],
+      "@constants": ["src/constants.ts"],
+      "@middlewares/*": ["src/middlewares/*"]
     }
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts","**/*.d.ts"],
   "exclude": ["node_modules", "dist", ".nyc_output", "husky"]
 }

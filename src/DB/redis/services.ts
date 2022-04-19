@@ -19,7 +19,6 @@ class RedisCRUDServices {
     await this.redisClient.del(key);
   }
   async setToExpire(key: string, value: string, expire: number): Promise<void> {
-    await this.setClient();
     await this.redisClient.setEx(key, expire, value);
   }
   async deleteAll(): Promise<void> {

@@ -21,31 +21,28 @@ const userData = [
     password: "312321",
   },
 ];
+before(()=>prismaClient.$connect())
 beforeEach(() => {
   return Promise.all(
     userData.map((element) => {
-      UserServices.createUser(element);
+      UserServices.createUser(element,{cuid:true});
     })
   );
 });
 afterEach(() => {
-  return Promise.all(
-    userData.map((element) => {
-      UserServices.deleteByField("email", element.email);
-    })
-  );
+  UserServices.deleteMany()
 });
 after(() => {
   prismaClient.$disconnect();
 });
-describe("User Tests", () => {
+describe("User Services Tests", () => {
   it("User is created", () => {
     const userData: UserCreate = {
       name: "test",
-      email: "email@yopmail.com",
+      email: "email55555@yopmail.com",
       password: "123456",
     };
-    UserServices.createUser(userData).then((user) => {
+    UserServices.createUser(userData,{cuid:true}).then((user) => {
       UserServices.getUserById(Number(user.getId())).then((user) => {
         expect(user).to.be.a("object");
       });
@@ -57,8 +54,8 @@ describe("User Tests", () => {
         email: "email5@yopmail.com",
         password: "123456",
       };
-      UserServices.createUser(userData).then((user) => {
-        UserServices.deleteByField("email", userData.email).then((user) => {
+      UserServices.createUser(userData,{cuid:true}).then(() => {
+        UserServices.deleteByField("email", userData.email).then(() => {
           UserServices.getUserByEmail(userData.email).then((user) => {
             expect(user).to.be.a("null");
           });
@@ -71,11 +68,11 @@ describe("User Tests", () => {
         email: "dads@yopmail.com",
         password: "123456",
       };
-      UserServices.createUser(userData).then((user) => {
+      UserServices.createUser(userData,{cuid:true}).then((user) => {
         UserServices.updateUser({
           id: user.getId(),
           name: "test2",
-          email: "dads@yopmail.com",
+          email: "bbbbbbbbbb@yopmail.com",
         }).then((user) => {
           UserServices.getUserById(Number(user.getId())).then((user) => {
             expect(user.getName()).to.be.equal("test2");

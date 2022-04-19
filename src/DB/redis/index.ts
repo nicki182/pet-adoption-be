@@ -1,7 +1,7 @@
-import { createClient } from "redis";
+import { createClient, RedisClientType } from "redis";
 class RedisClient {
-  //TODO: Check client type of redis-om
-  private client: any;
+  //TODO: Check client type of redis
+  private client:any;
   getClient() {
     return this.client;
   }

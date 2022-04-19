@@ -9,10 +9,8 @@ import {
   comparePassword,
   decodeToken,
 } from "../../src/utils/authentication";
-import { config } from "dotenv";
 import _ from "lodash";
 
-beforeEach(() => config());
 // runs before all tests in this block
 describe("Utils tests", () => {
   it("token is generated", () => {
@@ -69,9 +67,14 @@ describe("Utils tests", () => {
     const hash = await hashPassword(password);
     expect(hash).to.not.be.equal(password);
   });
-  it("Password is compared", async () => {
+  it("Password is compared to be true", async () => {
     const password = "test";
     const hash = await hashPassword(password);
     expect(await comparePassword(password, hash)).to.be.true;
-  });
+  }),
+    it("Password is compared to be false", async () => {
+      const password = "test";
+      const hash = await hashPassword(password);
+      expect(await comparePassword("test1", hash)).to.be.false;
+    })
 });

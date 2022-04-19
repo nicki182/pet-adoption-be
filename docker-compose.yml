@@ -1,5 +1,5 @@
 # Set the version of docker compose to use
-version: '3.9'
+version: "3.9"
 volumes:
   db:
     driver: local
@@ -7,7 +7,6 @@ volumes:
     driver: local
 # The containers that compose the project
 services:
-
   redis:
     image: "redis:latest"
     container_name: integration-test-redis
@@ -26,25 +25,26 @@ services:
   db:
     image: postgres:13
     restart: always
-    hostname: postgres 
+    hostname: postgres
     container_name: integration-tests-prisma
     ports:
-      - '5433:5432'
+      - "5433:5432"
     environment:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: prisma
       POSTGRES_DB: tests
   integration:
-              build:
-                context: .
-                dockerfile: Dockerfile
-              depends_on:
-                - redis
-                - db   
-              environment:
-                DATABASE_URL: postgresql://postgres:prisma@postgres:5433/tests?schema=public
-                SERVER_PORT: 3000
-                REDIS_URL: redis://redis:6370
-                EXPIRATION_TIME: 100
-                JWT_KEY: DAJIKDJASJDAS
-                SALT: 4
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+      - db
+    environment:
+      DATABASE_URL: postgresql://prisma:prisma@postgres:5432/tests?schema=public
+      SERVER_PORT: 3000
+      REDIS_URL: redis://redis:6370
+      EXPIRATION_TIME: 100
+      JWT_KEY: DAJIKDJASJDAS
+      SALT: 4
+      NODE_ENV: test

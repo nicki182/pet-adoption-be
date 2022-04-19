@@ -16,7 +16,8 @@ export interface UserModelI {
   cuid: string;
 }
 export interface UserSelect {
-  name?: string;
-  email?: string;
-  id: number;
+  name?: boolean;
+  email?: boolean;
+  id: boolean;
+  cuid: boolean;
 }
