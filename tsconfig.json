@@ -1,6 +1,12 @@
 {
   "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "checkJs": true,
+    "noEmit": false,
+    "declarationMap": true,
     "outDir": "dist",
     "module": "commonjs",
     "strictNullChecks": true,
@@ -24,6 +30,6 @@
       "@middlewares/*": ["src/middlewares/*"]
     }
   },
-  "include": ["**/*.ts","**/*.d.ts"],
+  "include": ["**/*.ts", "**/*.d.ts"],
   "exclude": ["node_modules", "dist", ".nyc_output", "husky"]
 }

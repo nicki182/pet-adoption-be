@@ -3,7 +3,7 @@ Hi, my name is Nicole Strulavits and this is my proyect pet adoption. I learned 
 ## Technologies:
 I use yarn on top of node which is faster in certain cases. Node 14.17.0 version and yarn 1.22.0
 #### - DBs:
-* Prisma
+* SQL(PostgreSQL) with Prisma ORM
 * Redis
 #### - Communication:
 * REST with express

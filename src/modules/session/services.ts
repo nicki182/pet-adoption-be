@@ -4,7 +4,7 @@ import Session from "./class";
 import { SessionI } from "./interfaces";
 import { generateToken } from "@utils/authentication";
 import CustomError from "../error/index";
-import  logger  from '@utils/logger';
+import logger from "@utils/logger";
 class SessionServices extends RedisCRUDServices {
   public async createSession(userId: string): Promise<Session> {
     const accessToken = await this.createAccessToken(userId);
@@ -40,10 +40,10 @@ class SessionServices extends RedisCRUDServices {
     return new Session(JSON.parse(session));
   }
   public async deleteSession(userId: string): Promise<void> {
-    try{
-    await this.del(userId);
-    logger.info(`Session deleted for user ${userId}`);
-    }catch(e){
+    try {
+      await this.del(userId);
+      logger.info(`Session deleted for user ${userId}`);
+    } catch (e) {
       throw new CustomError(String(e));
     }
   }
@@ -54,8 +54,13 @@ class SessionServices extends RedisCRUDServices {
   }
   public async refreshAccessToken(session: SessionI): Promise<Session> {
     const accessToken = await this.createAccessToken(session.userId);
-    await this.set(String(session.userId), JSON.stringify({...session, accessToken}));
-    logger.info(`Session access token has been refreshed for user ${session.userId}`);
+    await this.set(
+      String(session.userId),
+      JSON.stringify({ ...session, accessToken })
+    );
+    logger.info(
+      `Session access token has been refreshed for user ${session.userId}`
+    );
     return new Session(session);
   }
 }

@@ -1,7 +1,7 @@
 import { createClient, RedisClientType } from "redis";
 class RedisClient {
   //TODO: Check client type of redis
-  private client:any;
+  private client: any;
   getClient() {
     return this.client;
   }

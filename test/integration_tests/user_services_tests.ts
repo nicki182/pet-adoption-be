@@ -21,16 +21,16 @@ const userData = [
     password: "312321",
   },
 ];
-before(()=>prismaClient.$connect())
+before(() => prismaClient.$connect());
 beforeEach(() => {
   return Promise.all(
     userData.map((element) => {
-      UserServices.createUser(element,{cuid:true});
+      UserServices.createUser(element, { cuid: true });
     })
   );
 });
 afterEach(() => {
-  UserServices.deleteMany()
+  UserServices.deleteMany();
 });
 after(() => {
   prismaClient.$disconnect();
@@ -42,7 +42,7 @@ describe("User Services Tests", () => {
       email: "email55555@yopmail.com",
       password: "123456",
     };
-    UserServices.createUser(userData,{cuid:true}).then((user) => {
+    UserServices.createUser(userData, { cuid: true }).then((user) => {
       UserServices.getUserById(Number(user.getId())).then((user) => {
         expect(user).to.be.a("object");
       });
@@ -54,7 +54,7 @@ describe("User Services Tests", () => {
         email: "email5@yopmail.com",
         password: "123456",
       };
-      UserServices.createUser(userData,{cuid:true}).then(() => {
+      UserServices.createUser(userData, { cuid: true }).then(() => {
         UserServices.deleteByField("email", userData.email).then(() => {
           UserServices.getUserByEmail(userData.email).then((user) => {
             expect(user).to.be.a("null");
@@ -68,7 +68,7 @@ describe("User Services Tests", () => {
         email: "dads@yopmail.com",
         password: "123456",
       };
-      UserServices.createUser(userData,{cuid:true}).then((user) => {
+      UserServices.createUser(userData, { cuid: true }).then((user) => {
         UserServices.updateUser({
           id: user.getId(),
           name: "test2",

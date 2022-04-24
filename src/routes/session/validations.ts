@@ -13,9 +13,9 @@ const SessionValidation = yup.object().shape({
 const LoginValidation = yup.object().shape({
   email: yup.string().email().required("Email is required"),
   password: yup.string().required("Password is required"),
-})
+});
 const LogOutValidation = yup.object().shape({
   access_token: yup.string().nullable().required("Access token is required"),
 });
 
-export { UserValidation, SessionValidation, LoginValidation,LogOutValidation };
+export { UserValidation, SessionValidation, LoginValidation, LogOutValidation };

@@ -14,7 +14,7 @@ const generateToken = (userId: string, expirationTime: number | string) => {
   );
 };
 
-const verifyToken = (token: string):jwt.JwtPayload | string=> {
+const verifyToken = (token: string): jwt.JwtPayload | string => {
   const secret: string = process.env.JWT_KEY as string;
   return jwt.verify(token, secret);
 };
@@ -32,7 +32,10 @@ const comparePassword = (password: string, hash: string) => {
 async function validateSchema<
   T extends IValidationSchema,
   I extends Record<string, unknown>
->(schema: ObjectSchema<T>, data: I): Promise<{errors:unknown[],values:unknown}> {
+>(
+  schema: ObjectSchema<T>,
+  data: I
+): Promise<{ errors: unknown[]; values: unknown }> {
   try {
     await schema.validate(data, { abortEarly: false });
     return { errors: [], values: data };

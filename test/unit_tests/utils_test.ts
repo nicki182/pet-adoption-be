@@ -76,5 +76,5 @@ describe("Utils tests", () => {
       const password = "test";
       const hash = await hashPassword(password);
       expect(await comparePassword("test1", hash)).to.be.false;
-    })
+    });
 });

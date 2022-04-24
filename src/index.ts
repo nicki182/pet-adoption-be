@@ -8,18 +8,18 @@ import resolvers from "@graphql/resolvers";
 import typeDefs from "@graphql/typedefs";
 import cookieParser from "cookie-parser";
 import redis from "@redis/index";
-import { authenticate } from './middlewares/authentication';
-import  SessionServices  from '@session/services';
-import SessionRoutes from '@routes/session';
+import { authenticate } from "./middlewares/authentication";
+import SessionServices from "@session/services";
+import SessionRoutes from "@routes/session";
 import errorMiddleware from "./middlewares/error";
-import  ServerError  from '@error/ServerError';
+import ServerError from "@error/ServerError";
 const app = express();
 class Sever {
   async start() {
     const server = new ApolloServer({
       typeDefs,
       resolvers,
-      context
+      context,
     });
     await redis.start();
     //Set redis client for services that uses redis find a better solutions than this
@@ -28,11 +28,11 @@ class Sever {
     app.use(cors());
     app.use(express.json());
     app.use(cookieParser());
-    app.use(authenticate)
-    app.use('/auth', SessionRoutes);
+    app.use(authenticate);
+    app.use("/auth", SessionRoutes);
     //app.use("*/",(res,req)=>
     //req.send("Hello World!")),
-    app.use(errorMiddleware)
+    app.use(errorMiddleware);
 
     await server.start();
     server.applyMiddleware({ app });
@@ -43,17 +43,17 @@ class Sever {
       })
     );
 
-    process.env.NODE_ENV !== 'test' &&
-    app.listen(process.env.SERVER_PORT, () => {
-      console.log(`Server is running on port ${process.env.SERVER_PORT}`);
-      console.log(
-        `Server graphql server is on port http://localhost:${process.env.SERVER_PORT}${server.graphqlPath}`
-      );
-    });
+    process.env.NODE_ENV !== "test" &&
+      app.listen(process.env.SERVER_PORT, () => {
+        console.log(`Server is running on port ${process.env.SERVER_PORT}`);
+        console.log(
+          `Server graphql server is on port http://localhost:${process.env.SERVER_PORT}${server.graphqlPath}`
+        );
+      });
   }
 }
 const server = new Sever();
 
-//server.start();
-export {app}
+server.start();
+export { app };
 export default server;

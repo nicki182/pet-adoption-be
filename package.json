@@ -6,10 +6,11 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint . --ext .ts",
+    "prepare":"husky install",
     "build": "yarn clean && yarn compile",
     "clean": "rimraf ./dist",
     "restart:test": "docker system prune -a && yarn docker:build &&  yarn test:coverege",
-    "compile": "tsc",
+    "compile": "tsc --pretty",
     "bs": "yarn build && yarn start",
     "start": "nodemon -r dotenv/config -r tsconfig-paths/register src/index.ts",
     "debug": "nodemon --inspect src/index.ts",
