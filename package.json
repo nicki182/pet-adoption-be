@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "prepare":"husky install",
+    "prepare": "husky install",
     "build": "yarn clean && yarn compile",
     "clean": "rimraf ./dist",
     "restart:test": "docker system prune -a && yarn docker:build &&  yarn test:coverege",
