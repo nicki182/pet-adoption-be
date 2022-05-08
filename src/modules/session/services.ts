@@ -5,6 +5,7 @@ import { SessionI } from "./interfaces";
 import { generateToken } from "@utils/authentication";
 import CustomError from "../error/index";
 import logger from "@utils/logger";
+import ms from "ms";
 class SessionServices extends RedisCRUDServices {
   public async createSession(userId: string): Promise<Session> {
     const accessToken = await this.createAccessToken(userId);
@@ -19,7 +20,7 @@ class SessionServices extends RedisCRUDServices {
       await this.setToExpire(
         userId,
         JSON.stringify(session),
-        Number(process.env.EXPIRATION_TIME)
+        ms(process.env.EXPIRATION_TIME)
       );
     } catch (e) {
       throw new CustomError(String(e));
@@ -29,7 +30,7 @@ class SessionServices extends RedisCRUDServices {
     return session;
   }
   public async createAccessToken(userId: string): Promise<string> {
-    return generateToken(userId, Number(process.env.EXPIRATION_TIME));
+    return generateToken(userId, String(process.env.EXPIRATION_TIME));
   }
   public async createRefreshToken(userId: string): Promise<string> {
     return generateToken(userId, "1year");

@@ -9,7 +9,7 @@
     "prepare": "husky install",
     "build": "yarn clean && yarn compile",
     "clean": "rimraf ./dist",
-    "restart:test": "docker system prune -a && yarn docker:build &&  yarn test:coverege",
+    "restart:test": "docker system prune -a && yarn docker:build",
     "compile": "tsc --pretty",
     "bs": "yarn build && yarn start",
     "start": "nodemon -r dotenv/config -r tsconfig-paths/register src/index.ts",
@@ -23,7 +23,7 @@
     "docker:build": "docker-compose build",
     "test:all": "yarn mocha -—exit --timeout 10000 -r ts-node/register -r dotenv/config  -r tsconfig-paths/register  test/**/*.ts --reporter nyan",
     "test:integration": "yarn mocha -—exit --timeout 10000 -r  ts-node/register -r tsconfig-paths/register test/integration_tests/*.ts --reporter nyan",
-    "test:unit": "mocha -—exit --timeout 10000 -r  ts-node/register  test/unit_tests/*.ts --reporter nyan",
+    "test:unit": "mocha -—exit --timeout 10000 -r  ts-node/register -r dotenv/config  test/unit_tests/*.ts --reporter nyan",
     "coverege": "nyc yarn test:all",
     "bt": "yarn build && yarn test:unit",
     "bc": "yarn build && yarn coverege"

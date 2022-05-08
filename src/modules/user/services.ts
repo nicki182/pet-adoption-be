@@ -51,7 +51,7 @@ class UserServices extends PrismaServices {
       );
       if (!user) throw new CustomError("User not created");
       logger.info(`User ${user.cuid} created`);
-      return new User({ id: user.cuid, email: user.email, name: user.name });
+      return new User({ ...user,id: user.cuid });
     } catch (e) {
       throw new CustomError(String(e));
     }

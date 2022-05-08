@@ -2,11 +2,12 @@ import { PrismaPromise } from "@prisma/client";
 import prismaGenerated from "./index";
 import CustomError from "../../modules/error/index";
 //Add model names to the list below to enable them to be used in the code below
-type ModelType = "user";
+type ModelType = "user"|'animal';
 class PrismaServices {
   private readonly prisma;
   constructor(modelName: ModelType) {
     const prismaClient = prismaGenerated.getPrismaClient();
+    console.log('prismaClient........', prismaClient.user,prismaClient);
     this.prisma = prismaClient[modelName];
   }
   //TODO:RESOLVE ANY
@@ -22,8 +23,9 @@ class PrismaServices {
   }
   public async create(data: unknown, select: unknown) {
     try {
+      console.log('data........', data,this.prisma);
       const generate = await this.prisma.create({ data }, select);
-      if (!generate) throw new Error("User not created");
+      if (!generate) throw new Error("Generated not created");
       return generate;
     } catch (e) {
       throw new CustomError(String(e));

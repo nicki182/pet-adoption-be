@@ -11,6 +11,7 @@ I use yarn on top of node which is faster in certain cases. Node 14.17.0 version
 #### - Testing:
 * Mocha
 * Chai
+* NYC
 * Docker for integration testing
 #### -Lenguages:
 * Typescript
