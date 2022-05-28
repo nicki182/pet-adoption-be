@@ -1,8 +1,18 @@
+import { Role } from "@prisma/client";
 export interface UserI {
   id: string;
   name: string;
   email: string;
-  phoneNumber?:string;
+  phoneNumber?: string;
+  role: Role;
+}
+export interface UserClass{
+    id: string;
+    name: string;
+    email: string;
+    phoneNumber?: string;
+    role: Role;
+    password:string
 }
 export interface UserCreate {
   name: string;
@@ -15,6 +25,7 @@ export interface UserModelI {
   email: string;
   password: string;
   cuid: string;
+  role:Role
 }
 export interface UserSelect {
   name?: boolean;

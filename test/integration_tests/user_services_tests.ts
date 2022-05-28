@@ -30,7 +30,7 @@ beforeEach(() => {
   );
 });
 afterEach(() => {
-  UserServices.deleteMany();
+  prismaClient.user.deleteMany();
 });
 after(() => {
   prismaClient.$disconnect();
@@ -54,8 +54,8 @@ describe("User Services Tests", () => {
         email: "email5@yopmail.com",
         password: "123456",
       };
-      UserServices.createUser(userData, { cuid: true }).then(() => {
-        UserServices.deleteByField("email", userData.email).then(() => {
+      UserServices.createUser(userData, { cuid: true }).then((user) => {
+        UserServices.deleteUser(user.getId()).then(() => {
           UserServices.getUserByEmail(userData.email).then((user) => {
             expect(user).to.be.a("null");
           });

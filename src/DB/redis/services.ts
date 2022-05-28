@@ -1,6 +1,6 @@
-import { GenericCrudServicesI } from "../../interfaces";
+import { GenericCacheServicesI } from "../../interfaces";
 import RedisClient from "./index";
-class RedisCRUDServices {
+class RedisCRUDServices implements GenericCacheServicesI {
   private redisClient = RedisClient.getClient();
 
   public async get(key: string): Promise<string> {
@@ -25,4 +25,4 @@ class RedisCRUDServices {
     await this.redisClient.flushDb();
   }
 }
-export default RedisCRUDServices;
+export default new RedisCRUDServices();

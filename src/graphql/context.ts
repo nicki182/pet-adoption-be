@@ -1,11 +1,17 @@
 import PrismaClient from "@prismaAPI/index";
+import {verifyToken} from "@utils/authentication";
+import  ServerError  from '@error/ServerError';
 const context = async ({ req }) => {
   const prisma = PrismaClient.getPrismaClient();
-  const userId = req.session.userId;
+  const session = verifyToken(req.cookies.token);
+  if(session){
+  req.cookies.token && (req.headers.authorization = `Bearer ${req.cookies.accessToken}`);
+  console.log('aca estoy',session)
   //Authentication Error Handling
   return {
     prisma,
-    userId,
+    session,
   };
+}else throw new ServerError(401,{message:"Unauthorized",status:401})
 };
 export default context;

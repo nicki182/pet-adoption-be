@@ -13,7 +13,7 @@ class ServerError extends Error {
     const defaultStatus = 500; // Internal Server Error
     //console.log(code,error)
     if (!code && !error) throw new Error("Constructor requires code or error");
-    
+
     super(code ? errors[code] : _.get(error, "message", errors[defaultStatus]));
     if (code) {
       this.status = code;

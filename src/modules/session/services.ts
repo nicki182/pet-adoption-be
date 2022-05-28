@@ -6,18 +6,21 @@ import { generateToken } from "@utils/authentication";
 import CustomError from "../error/index";
 import logger from "@utils/logger";
 import ms from "ms";
-class SessionServices extends RedisCRUDServices {
-  public async createSession(userId: string): Promise<Session> {
+import { Role } from "@prisma/client";
+class SessionServices{
+  private redisClient = RedisCRUDServices
+  public async createSession(userId: string,role:Role): Promise<Session> {
     const accessToken = await this.createAccessToken(userId);
     const refreshToken = await this.createRefreshToken(userId);
     const sessionData: SessionI = {
       accessToken,
       refreshToken,
       userId,
+      role
     };
     const session = new Session(sessionData);
     try {
-      await this.setToExpire(
+      await this.redisClient.setToExpire(
         userId,
         JSON.stringify(session),
         ms(process.env.EXPIRATION_TIME)
@@ -36,26 +39,26 @@ class SessionServices extends RedisCRUDServices {
     return generateToken(userId, "1year");
   }
   public async getSession(userId: string): Promise<Session> {
-    const session: string = await this.get(userId);
+    const session: string = await this.redisClient.get(userId);
     if (!session) throw new CustomError("Session not found");
     return new Session(JSON.parse(session));
   }
   public async deleteSession(userId: string): Promise<void> {
     try {
-      await this.del(userId);
+      await this.redisClient.del(userId);
       logger.info(`Session deleted for user ${userId}`);
     } catch (e) {
       throw new CustomError(String(e));
     }
   }
   public async updateSession(session: SessionI): Promise<Session> {
-    await this.set(String(session.userId), JSON.stringify(session));
+    await this.redisClient.set(String(session.userId), JSON.stringify(session));
     logger.info(`Session updated for user ${session.userId}`);
     return new Session(session);
   }
   public async refreshAccessToken(session: SessionI): Promise<Session> {
     const accessToken = await this.createAccessToken(session.userId);
-    await this.set(
+    await this.redisClient.set(
       String(session.userId),
       JSON.stringify({ ...session, accessToken })
     );

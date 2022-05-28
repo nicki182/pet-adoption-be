@@ -8,14 +8,48 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  password String
-  name  String?
-  phoneNumber String ?
-  role Role    @default(USER)
-  cuid  String @default(cuid()) @unique
-  @@index([cuid,email])
+  id          Int     @id @default(autoincrement())
+  email       String  @unique
+  password    String
+  name        String?
+  phoneNumber String?
+  role        Role    @default(USER)
+  cuid        String  @unique @default(cuid())
+
+  @@index([cuid, email])
+  Animal Animal[]
+}
+
+model Animal {
+  id                  Int     @id @default(autoincrement())
+  userId              Int?
+  name                String
+  type                Type
+  description         String
+  state               State   @default(AVAILABLE)
+  profilePic          String?
+  height              Int
+  weigth              Int
+  color               String
+  dieteryRestrictions String?
+  hypollergenic       Boolean @default(false)
+  breed               String?
+  age                 Int?
+  cuid                String  @unique @default(cuid())
+  User                User?   @relation(fields: [userId], references: [id])
+  @@index([cuid,userId])
+}
+
+enum State {
+  ADOPTED
+  FOSTER
+  AVAILABLE
+}
+
+enum Type {
+  CAT
+  DOG
+  HORSE
 }
 
 enum Role {

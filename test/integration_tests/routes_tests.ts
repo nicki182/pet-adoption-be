@@ -2,6 +2,8 @@ import "mocha";
 import { expect, request, use } from "chai";
 import chaihttp from "chai-http";
 import server, { app } from "../../src/index";
+import prisma from "src/DB/prisma";
+import redis from "src/DB/redis";
 import UserServices from "@user/services";
 import SessionService from "@session/services";
 before(() => {
@@ -11,15 +13,15 @@ before(() => {
     { email: "email1@yopmail.com", password: "123456", name: "name" },
     { cuid: true }
   ).then((user) => {
-    SessionService.createSession(user.getId());
+    SessionService.createSession(user.getId(),user.getRole());
     //done()
   });
 });
 after(() => {
   return Promise.all([
     //RedisClient.stop(),
-    SessionService.deleteAll(),
-    UserServices.deleteMany(),
+    redis.getClient().deleteAll(),
+    prisma.getPrismaClient().user.deleteMany(),
   ]);
 });
 describe("Routes tests", () => {

@@ -31,5 +31,12 @@
     }
   },
   "include": ["**/*.ts", "**/*.d.ts"],
-  "exclude": ["node_modules", "dist", ".nyc_output", "husky"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".nyc_output",
+    "husky",
+    "test",
+    "coverage"
+  ]
 }
