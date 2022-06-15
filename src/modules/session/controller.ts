@@ -11,14 +11,12 @@ import SessionServices from "./services";
 class ControllerSession {
   async logInSession(data: DataRequest): Promise<Session> {
     try {
-      const user: User = await UserServices.getUserByEmail(
-        data.email
-      );
+      const user: User = await UserServices.getUserByEmail(data.email);
       if (!user) throw new CustomError("User not found");
       if (!UserServices.validatePassword(data.password, user.getPassword()))
         throw new CustomError("Password is incorrect");
       logger.info(`User ${user.getId()} logged in`);
-      return SessionServices.createSession(user.getId(),user.getRole());
+      return SessionServices.createSession(user.getId(), user.getRole());
     } catch (error) {
       throw new CustomError(String(error));
     }
@@ -31,7 +29,7 @@ class ControllerSession {
         name: true,
       });
       if (!user) throw new CustomError("User not created");
-      return SessionServices.createSession(user.getId(),user.getRole());
+      return SessionServices.createSession(user.getId(), user.getRole());
     } catch (e) {
       throw new CustomError(String(e));
     }
@@ -48,7 +46,7 @@ class ControllerSession {
           userId: session.getUserId(),
           refreshToken: session.getRefreshToken(),
           accessToken: session.getAccessToken(),
-          role: session.getRole()
+          role: session.getRole(),
         });
       else throw new CustomError("Invalid refresh token");
     } catch (e) {

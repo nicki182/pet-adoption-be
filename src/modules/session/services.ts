@@ -7,16 +7,16 @@ import CustomError from "../error/index";
 import logger from "@utils/logger";
 import ms from "ms";
 import { Role } from "@prisma/client";
-class SessionServices{
-  private redisClient = RedisCRUDServices
-  public async createSession(userId: string,role:Role): Promise<Session> {
+class SessionServices {
+  private redisClient = RedisCRUDServices;
+  public async createSession(userId: string, role: Role): Promise<Session> {
     const accessToken = await this.createAccessToken(userId);
     const refreshToken = await this.createRefreshToken(userId);
     const sessionData: SessionI = {
       accessToken,
       refreshToken,
       userId,
-      role
+      role,
     };
     const session = new Session(sessionData);
     try {

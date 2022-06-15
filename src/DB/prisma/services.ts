@@ -8,6 +8,7 @@ class PrismaServices<TypeModel,TypeSelect> implements GenericCrudServicesI<TypeM
   private readonly prisma;
   constructor(modelName: ModelType) {
     const prismaClient = prismaGenerated.getPrismaClient();
+    console.log(prismaClient.user)
     this.prisma = prismaClient[modelName];
   }
   //TODO:RESOLVE ANY

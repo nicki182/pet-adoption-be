@@ -50,6 +50,7 @@ enum Type {
   CAT
   DOG
   HORSE
+  BIRD
 }
 
 enum Role {

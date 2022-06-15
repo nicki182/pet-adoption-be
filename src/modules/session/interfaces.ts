@@ -3,7 +3,7 @@ export interface SessionI {
   accessToken: string;
   refreshToken: string;
   userId: string;
-  role:Role
+  role: Role;
 }
 export interface DataRequest {
   email: string;

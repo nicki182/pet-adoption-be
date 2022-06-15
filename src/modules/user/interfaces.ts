@@ -6,13 +6,13 @@ export interface UserI {
   phoneNumber?: string;
   role: Role;
 }
-export interface UserClass{
-    id: string;
-    name: string;
-    email: string;
-    phoneNumber?: string;
-    role: Role;
-    password:string
+export interface UserClass {
+  id: string;
+  name: string;
+  email: string;
+  phoneNumber?: string;
+  role: Role;
+  password: string;
 }
 export interface UserCreate {
   name: string;
@@ -25,7 +25,7 @@ export interface UserModelI {
   email: string;
   password: string;
   cuid: string;
-  role:Role
+  role: Role;
 }
 export interface UserSelect {
   name?: boolean;

@@ -1,19 +1,19 @@
 import { UserClass, UserI } from "./interfaces";
-import { Role } from '@prisma/client';
+import { Role } from "@prisma/client";
 class User {
   private id;
   private name;
   private email;
   private phoneNumber;
-  private role:Role;
-  private password:string
+  private role: Role;
+  private password: string;
   constructor(userData: UserClass) {
     this.id = userData.id;
     this.name = userData.name;
     this.email = userData.email;
     this.phoneNumber = userData.phoneNumber;
-    this.role = userData.role
-    this.password = userData.password
+    this.role = userData.role;
+    this.password = userData.password;
   }
   public getId(): string {
     return this.id;
@@ -34,7 +34,7 @@ class User {
     this.phoneNumber = newPhoneNumber;
   }
   public getPassword(): string {
-    return this.password
+    return this.password;
   }
   public getPhoneNumber(): string {
     return this.phoneNumber;
@@ -43,7 +43,7 @@ class User {
     return true;
   }
   public getRole(): Role {
-    return this.role
+    return this.role;
   }
 }
 export default User;

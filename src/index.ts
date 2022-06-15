@@ -2,7 +2,7 @@ import context from "@graphql/context";
 import resolvers from "@graphql/resolvers";
 import typeDefs from "@graphql/typedefs";
 import redis from "@redis/index";
-import AnimalRoutes from '@routes/animal';
+import AnimalRoutes from "@routes/animal";
 import SessionRoutes from "@routes/session";
 import { ApolloServer } from "apollo-server-express";
 import cookieParser from "cookie-parser";
@@ -12,25 +12,25 @@ import expressWinston from "express-winston";
 import { transports } from "winston";
 import { authenticate } from "./middlewares/authentication";
 import errorMiddleware from "./middlewares/error";
+import  RedisCRUDServices  from '@redis/services';
 const app = express();
 class Sever {
   async start() {
     const server = new ApolloServer({
       typeDefs,
       resolvers,
-      context,
+      context
     });
     await redis.start();
-    //Set redis client for services that uses redis find a better solutions than this
+    RedisCRUDServices.setClient();
     //Express server
     app.use(cors());
     app.use(express.json());
     app.use(cookieParser());
     app.use(authenticate);
     app.use("/auth", SessionRoutes);
-    app.use('/animals', AnimalRoutes);
+    app.use("/animals", AnimalRoutes);
     app.use(errorMiddleware);
-
     await server.start();
     server.applyMiddleware({ app });
     app.use(

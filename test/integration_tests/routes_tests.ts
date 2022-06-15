@@ -13,7 +13,7 @@ before(() => {
     { email: "email1@yopmail.com", password: "123456", name: "name" },
     { cuid: true }
   ).then((user) => {
-    SessionService.createSession(user.getId(),user.getRole());
+    SessionService.createSession(user.getId(), user.getRole());
     //done()
   });
 });
